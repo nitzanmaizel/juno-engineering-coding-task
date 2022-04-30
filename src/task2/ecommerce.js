@@ -35,8 +35,17 @@ const bucketOrdersByUsers = async () => {
   }
 };
 
-const getLast2WeeksOrders = () => {
+const getLast2WeeksOrders = async () => {
   //   3. TODO: fetch all Ids and return array with only the last 2 weeks orders. make it work as efficient and clean as possible.
+  try {
+    const twoWeeks = Date.now() - 1000 * 60 * 60 * 24 * 14;
+
+    const allOrders = await fetchAllOrders();
+
+    return allOrders.filter((order) => order.timestamp < twoWeeks);
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 const bucketOrdersByDate = () => {
