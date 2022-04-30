@@ -1,26 +1,34 @@
 import React, { useState, useEffect } from "react";
-import { fetchImageUrls } from "../api/index";
+import { fetchImage, fetchImageUrls } from "../api/index";
 
 const ImageCarousel = () => {
   const [imagesUrl, setImagesUrl] = useState([]);
+  const [currentImage, setCurrentImage] = useState(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     const fetchImageFromApi = async () => {
       try {
-        const imagesUrl = await fetchImageUrls();
-        setImagesUrl(imagesUrl);
+        setCurrentImage(null);
+        if (!imagesUrl.length) {
+          const imagesUrl = await fetchImageUrls();
+          setImagesUrl(imagesUrl);
+        }
+
+        const image = await fetchImage(currentIndex);
+        setCurrentImage(image);
       } catch (error) {
         console.error(error);
       }
     };
 
     fetchImageFromApi();
-  }, []);
+  }, [currentIndex, imagesUrl]);
 
   return (
     <div className="container">
       <div>Prev</div>
-      {imagesUrl.length > 0 ? <img src={imagesUrl[0]} alt="img" width={500} height={500} /> : <div>Loading...</div>}
+      {currentImage ? <img src={currentImage} alt="img" width={500} height={500} /> : <div>Loading...</div>}
       <div>Next</div>
     </div>
   );
