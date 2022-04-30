@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { fetchImage, fetchImageUrls } from '../api/index';
 
 const ImageCarousel = () => {
@@ -37,14 +37,22 @@ const ImageCarousel = () => {
     } else setCurrentIndex(currentIndex + 1);
   };
 
+  const renderImage = () => {
+    return (
+      <Fragment>
+        {currentImage ? (
+          <img src={currentImage} alt='img' width={500} height={500} />
+        ) : (
+          <div className='loading'>Loading...</div>
+        )}
+      </Fragment>
+    );
+  };
+
   return (
     <div className='container'>
       <div onClick={handlePrev}>Prev</div>
-      {currentImage ? (
-        <img src={currentImage} alt='img' width={500} height={500} />
-      ) : (
-        <div>Loading...</div>
-      )}
+      {renderImage()}
       <div onClick={handleNext}>Next</div>
     </div>
   );
