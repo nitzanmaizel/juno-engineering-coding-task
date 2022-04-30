@@ -25,11 +25,23 @@ const ImageCarousel = () => {
     fetchImageFromApi();
   }, [currentIndex, imagesUrl]);
 
+  const handlePrev = () => {
+    if (currentIndex === 0) {
+      setCurrentIndex(imagesUrl.length - 1);
+    } else setCurrentIndex(currentIndex - 1);
+  };
+
+  const handleNext = () => {
+    if (currentIndex >= imagesUrl.length - 1) {
+      setCurrentIndex(0);
+    } else setCurrentIndex(currentIndex + 1);
+  };
+
   return (
     <div className="container">
-      <div>Prev</div>
+      <div onClick={handlePrev}>Prev</div>
       {currentImage ? <img src={currentImage} alt="img" width={500} height={500} /> : <div>Loading...</div>}
-      <div>Next</div>
+      <div onClick={handleNext}>Next</div>
     </div>
   );
 };
