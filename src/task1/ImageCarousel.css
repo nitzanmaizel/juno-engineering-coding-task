@@ -1,0 +1,38 @@
+.container {
+  margin: 100px 50px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  height: 500px;
+  align-items: center;
+}
+
+.button {
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 10px;
+  cursor: pointer;
+  margin: 20px;
+}
+
+.next {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
+.prev {
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+}
+
+.image {
+  width: 500px;
+  height: 500px;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  width: 500px;
+}

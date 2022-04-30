@@ -1,6 +1,8 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { fetchImage, fetchImageUrls } from '../api/index';
 
+import './ImageCarousel.css';
+
 const ImageCarousel = () => {
   const [imagesUrl, setImagesUrl] = useState([]);
   const [currentImage, setCurrentImage] = useState(null);
