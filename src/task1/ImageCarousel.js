@@ -5,10 +5,12 @@ const ImageCarousel = () => {
   const [imagesUrl, setImagesUrl] = useState([]);
   const [currentImage, setCurrentImage] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchImageFromApi = async () => {
       try {
+        setLoading(true);
         setCurrentImage(null);
         if (!imagesUrl.length) {
           const imagesUrl = await fetchImageUrls();
@@ -17,6 +19,7 @@ const ImageCarousel = () => {
 
         const image = await fetchImage(currentIndex);
         setCurrentImage(image);
+        setLoading(false);
       } catch (error) {
         console.error(error);
       }
@@ -40,7 +43,7 @@ const ImageCarousel = () => {
   const renderImage = () => {
     return (
       <Fragment>
-        {currentImage ? (
+        {!loading && currentImage ? (
           <img src={currentImage} alt='img' width={500} height={500} />
         ) : (
           <div className='loading'>Loading...</div>
@@ -51,9 +54,9 @@ const ImageCarousel = () => {
 
   return (
     <div className='container'>
-      <div onClick={handlePrev}>Prev</div>
+      <div className='button prev' onClick={handlePrev} />
       {renderImage()}
-      <div onClick={handleNext}>Next</div>
+      <div className='button next' onClick={handleNext} />
     </div>
   );
 };
