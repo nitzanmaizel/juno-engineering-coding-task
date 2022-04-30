@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { fetchImage, fetchImageUrls } from "../api/index";
+import React, { useState, useEffect } from 'react';
+import { fetchImage, fetchImageUrls } from '../api/index';
 
 const ImageCarousel = () => {
   const [imagesUrl, setImagesUrl] = useState([]);
@@ -38,9 +38,13 @@ const ImageCarousel = () => {
   };
 
   return (
-    <div className="container">
+    <div className='container'>
       <div onClick={handlePrev}>Prev</div>
-      {currentImage ? <img src={currentImage} alt="img" width={500} height={500} /> : <div>Loading...</div>}
+      {currentImage ? (
+        <img src={currentImage} alt='img' width={500} height={500} />
+      ) : (
+        <div>Loading...</div>
+      )}
       <div onClick={handleNext}>Next</div>
     </div>
   );
