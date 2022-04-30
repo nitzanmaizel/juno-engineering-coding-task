@@ -48,11 +48,24 @@ const getLast2WeeksOrders = async () => {
   }
 };
 
-const bucketOrdersByDate = () => {
-  let ordersByDate = {};
+const bucketOrdersByDate = async () => {
   //   4. TODO: using the function from section 3 bucket the orders by date.
   // each key in the object (ordersByDate) represents a day and each value is an array of the orders in that date.
-  return ordersByDate;
+  let ordersByDate = {};
+  try {
+    const ordersFromLastTwoWeeks = await getLast2WeeksOrders();
+
+    ordersFromLastTwoWeeks.forEach((order) => {
+      if (ordersByDate[order.timestamp]) {
+        ordersByDate[order.timestamp] = [...ordersByDate[order.timestamp], order];
+      } else {
+        ordersByDate[order.timestamp] = [order];
+      }
+    });
+    return ordersByDate;
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 fetchAllOrders();
