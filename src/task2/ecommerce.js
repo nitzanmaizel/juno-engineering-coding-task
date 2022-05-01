@@ -80,4 +80,5 @@ getLast2WeeksOrders();
 bucketOrdersByDate();
 // .then(console.log);
 
+export { fetchAllOrders, bucketOrdersByUsers, getLast2WeeksOrders, bucketOrdersByDate };
 ////////////////////////////////////////

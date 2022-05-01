@@ -46,7 +46,13 @@ const ImageCarousel = () => {
     return (
       <Fragment>
         {!loading && currentImage ? (
-          <img src={currentImage} alt='img' width={500} height={500} />
+          <img
+            data-testid={`image-${currentIndex}`}
+            src={currentImage}
+            alt='img'
+            width={500}
+            height={500}
+          />
         ) : (
           <div className='loading'>Loading...</div>
         )}
@@ -55,10 +61,10 @@ const ImageCarousel = () => {
   };
 
   return (
-    <div className='container'>
-      <div className='button prev' onClick={handlePrev} />
+    <div data-testid='ImageCarousel' className='container'>
+      <div role='button-prev' className='button prev' onClick={handlePrev} />
       {renderImage()}
-      <div className='button next' onClick={handleNext} />
+      <div role='button-next' className='button next' onClick={handleNext} />
     </div>
   );
 };
